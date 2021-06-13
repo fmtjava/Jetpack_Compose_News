@@ -45,7 +45,7 @@
  ### v1.0
    * 初始化项目，完成爱看App核心功能，目前实现引导页、新闻、视频、美图、天气、新闻详情、视频播放等功能，后续持续完善中...
 
-# Thanks
+# 感谢
   - [accompanist](https://github.com/google/accompanist)
   - [JiaoZiVideoPlayer](https://github.com/Jzvd/JZVideo)
   - [Banner](https://github.com/youth5201314/banner)
