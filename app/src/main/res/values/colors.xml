@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FF1da8fe</color>
+    <color name="purple_500">#FF1da8fe</color>
+    <color name="purple_700">#FFFFCDD2</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!--标签背景颜色-->
+    <color name="mask_tags_5">#678ce0</color>
+    <color name="mask_tags_8">#1da8fe</color>
+    <color name="mask_tags_10">#478de4</color>
+</resources>

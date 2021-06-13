@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">爱看</string>
+    <string name="information_title">最新资讯</string>
+    <string name="pretty_pic_title">美图推荐</string>
+    <string name="recommend_movie_title">今日推荐</string>
+    <string name="actual_weather_title">实时天气</string>
+    <string name="movie_score">综合评分</string>
+    <string name="score_tip">分</string>
+    <string name="start_experience">开始体验</string>
+</resources>
