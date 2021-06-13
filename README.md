@@ -1,5 +1,5 @@
 # 爱看App
-基于Jetpack Compose实现的一款集新闻、视频、美图、天气等功能的资讯App,持续完善中...<br /><br />
+基于Jetpack Compose实现的一款集新闻、视频、美图、天气等功能的资讯App,持续完善中...<br />
 
 **如果喜欢的话希望给个 `Star` 或 `Fork` ^_^ ，谢谢**
 
@@ -28,12 +28,12 @@
 
 # 核心功能
 <div>
-  <img src="http://qtgrmwxhb.hn-bkt.clouddn.com/10.jpg"/>
+  <img src="http://qtgrmwxhb.hn-bkt.clouddn.com/10.png"/>
 </div>
 
 # 核心技术
 <div>
-  <img src="http://qtgrmwxhb.hn-bkt.clouddn.com/11.jpg"/>
+  <img src="http://qtgrmwxhb.hn-bkt.clouddn.com/11.png"/>
 </div>
 
 # 下载体验
