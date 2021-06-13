@@ -50,6 +50,8 @@
   - [JiaoZiVideoPlayer](https://github.com/Jzvd/JZVideo)
   - [Banner](https://github.com/youth5201314/banner)
   - [retrofit2](https://github.com/square/retrofit)
+  - [干货集中营](https://gank.io/)
+  - [Nowapi](https://www.nowapi.com/)
 
  # 关于我
   - WX：fmtjava
