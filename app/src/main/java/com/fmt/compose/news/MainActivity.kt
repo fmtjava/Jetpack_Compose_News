@@ -13,8 +13,10 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Place
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -66,7 +68,12 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-val listItems = listOf("新闻", "视频", "美图", "天气")
+val listItems = listOf(
+    mApp.getString(R.string.news_tab_title),
+    mApp.getString(R.string.video_tab_title),
+    mApp.getString(R.string.pic_tab_title),
+    mApp.getString(R.string.weather_tab_title)
+)
 
 @ExperimentalPagerApi
 @Composable

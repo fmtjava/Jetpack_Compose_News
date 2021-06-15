@@ -2,7 +2,9 @@ package com.fmt.compose.news.ui.info
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -14,10 +16,11 @@ import androidx.compose.ui.viewinterop.AndroidView
 import com.fmt.compose.news.ui.theme.Jetpack_Compose_newsTheme
 import com.fmt.compose.news.view.TitleBar
 import android.view.KeyEvent.KEYCODE_BACK
+import com.fmt.compose.news.view.ProgressWebView
 
 class NewsDetailActivity : ComponentActivity() {
 
-    private lateinit var mWebView: WebView
+    private lateinit var mWebView: ProgressWebView
 
     companion object {
         const val TITLE = "title"
@@ -36,7 +39,7 @@ class NewsDetailActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         val title = intent.getStringExtra(TITLE)!!
         val content = intent.getStringExtra(CONTENT)!!
-        mWebView = WebView(this).apply {
+        mWebView = ProgressWebView(this).apply {
             settings.useWideViewPort = true
             settings.loadWithOverviewMode = true
             webViewClient = WebViewClient()
