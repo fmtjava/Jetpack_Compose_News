@@ -52,6 +52,7 @@
   - [retrofit2](https://github.com/square/retrofit)
   - [干货集中营](https://gank.io/)
   - [Nowapi](https://www.nowapi.com/)
+  - [SimpleNews](https://github.com/liuling07/SimpleNews)
 
  # 关于我
   - WX：fmtjava
