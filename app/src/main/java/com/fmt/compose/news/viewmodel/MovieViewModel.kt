@@ -8,9 +8,9 @@ class MovieViewModel : BaseViewModel() {
 
     val moviesLiveData = MutableLiveData<List<MovieItemModel>>()
 
-    fun getMovieLists() {
+    fun getMovieLists(apiUrl:String) {
         launch {
-            val movieModel = ApiService.getMovies()
+            val movieModel = ApiService.getMovies(apiUrl)
             moviesLiveData.value = movieModel.itemList
         }
     }

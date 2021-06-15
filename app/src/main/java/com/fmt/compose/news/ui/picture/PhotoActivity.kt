@@ -15,11 +15,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
 import androidx.compose.material.Surface
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
@@ -27,6 +29,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.fmt.compose.news.R
 import com.google.accompanist.coil.rememberCoilPainter
+import com.google.accompanist.imageloading.ImageLoadState
 
 class PhotoActivity : ComponentActivity() {
 
@@ -74,18 +77,19 @@ fun PhotoViewPage(url: String, click: () -> Unit) {
 
         rotation += rotationChange
     }
+    val painter = rememberCoilPainter(
+        url,
+        fadeIn = true
+    )
     Box(
         Modifier
             .fillMaxSize()
             .background(color = Color.Black)
     ) {
         Image(
-            painter = rememberCoilPainter(
-                url,
-                fadeIn = true
-            ),
-            null,
-            contentScale = ContentScale.Inside,
+            painter,
+            url,
+            contentScale = ContentScale.FillWidth,
             modifier = Modifier
                 .graphicsLayer(
                     scaleX = scale,
@@ -95,6 +99,10 @@ fun PhotoViewPage(url: String, click: () -> Unit) {
                 .transformable(state = state)
                 .fillMaxSize()
         )
+
+        if (painter.loadState is ImageLoadState.Loading) {
+            CircularProgressIndicator(Modifier.align(Alignment.Center))
+        }
 
         BackArrowDown(click = click)
     }
