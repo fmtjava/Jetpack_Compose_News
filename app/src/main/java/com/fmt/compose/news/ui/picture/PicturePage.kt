@@ -1,6 +1,7 @@
 package com.fmt.compose.news.ui.picture
 
 import android.app.Activity
+import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -32,7 +33,7 @@ import com.google.accompanist.coil.rememberCoilPainter
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun PicturePage() {
-
+    Log.e("fmt", "PicturePage")
     val context = LocalContext.current
     val viewModel: PictureViewModel = viewModel()
     val state by viewModel.stateLiveData.observeAsState()
@@ -40,7 +41,9 @@ fun PicturePage() {
 
     LoadingPage(
         state = state!!,
-        loadInit = { viewModel.getPicList() }) {
+        loadInit = {
+            viewModel.getPicList()
+        }) {
         Column(Modifier.fillMaxSize()) {
             TopAppBar {
                 Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {

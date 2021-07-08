@@ -59,7 +59,7 @@ fun GuidePage(images: List<Int>, go2Main: () -> Unit) {
     Box(Modifier.fillMaxSize()) {
         val pagerState = rememberPagerState(
             pageCount = images.size,
-            initialOffscreenLimit = 2,
+            initialOffscreenLimit = 2
         )
         HorizontalPager(
             state = pagerState,
@@ -95,7 +95,7 @@ fun GuidePage(images: List<Int>, go2Main: () -> Unit) {
             pagerState = pagerState,
             modifier = Modifier
                 .align(Alignment.BottomCenter)
-                .padding(16.dp),
+                .padding(8.dp),
             activeColor = Purple500,
             inactiveColor = Color.White
         )

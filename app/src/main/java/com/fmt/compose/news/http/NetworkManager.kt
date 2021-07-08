@@ -5,7 +5,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 const val ZHIHU_URL = "http://news-at.zhihu.com/api/"
-private const val BASE_URL = "https://api.apiopen.top/"
 
 private val retrofit by lazy {
     Retrofit.Builder()

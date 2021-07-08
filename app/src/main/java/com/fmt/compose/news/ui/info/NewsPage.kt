@@ -10,6 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -24,11 +25,21 @@ import com.fmt.compose.news.R
 import com.fmt.compose.news.ext.toPx
 import com.fmt.compose.news.model.NewsModelModel
 import com.fmt.compose.news.model.StoryModel
+import com.fmt.compose.news.model.TopStoryModel
+import com.fmt.compose.news.ui.movie.MoviePage
+import com.fmt.compose.news.ui.picture.PicturePage
+import com.fmt.compose.news.ui.theme.Purple500
+import com.fmt.compose.news.ui.weather.WeatherPage
 import com.fmt.compose.news.view.LoadingPage
 import com.fmt.compose.news.view.TitleBar
 import com.fmt.compose.news.viewmodel.NewsViewModel
 import com.google.accompanist.coil.rememberCoilPainter
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.HorizontalPagerIndicator
+import com.google.accompanist.pager.rememberPagerState
 
+@ExperimentalPagerApi
 @Composable
 fun NewsPage() {
     val viewMode: NewsViewModel = viewModel()
@@ -58,6 +69,36 @@ fun NewsPage() {
                 }
             }
         })
+}
+
+@ExperimentalPagerApi
+@Composable
+fun NewsBanner(topStories: List<TopStoryModel>) {
+    Box(modifier = Modifier.height(200.dp)) {
+        val pagerState = rememberPagerState(
+            pageCount = topStories.size,
+            infiniteLoop = true
+        )
+        HorizontalPager(
+            state = pagerState,
+            modifier = Modifier.fillMaxSize()
+        ) { page ->
+            Image(
+                painter = rememberCoilPainter(topStories[page].image, fadeIn = true),
+                null,
+                contentScale = ContentScale.FillWidth,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+        HorizontalPagerIndicator(
+            pagerState = pagerState,
+            modifier = Modifier
+                .padding(6.dp)
+                .align(Alignment.BottomCenter),
+            activeColor = Purple500,
+            inactiveColor = Color.White
+        )
+    }
 }
 
 @Composable

@@ -16,13 +16,13 @@ import com.fmt.compose.news.ext.State
 @Composable
 fun LoadingPage(
     state: State,
-    loadInit: () -> Unit,
+    loadInit: (() -> Unit)? = null,
     contentView: @Composable BoxScope.() -> Unit
 ) {
     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         when {
             state.isLoading() -> {
-                loadInit()
+                loadInit?.invoke()
                 CircularProgressIndicator()
             }
             state.isError() -> {
@@ -31,7 +31,7 @@ fun LoadingPage(
                     modifier = Modifier
                         .padding(20.dp)
                         .clickable {
-                            loadInit()
+                            loadInit?.invoke()
                         }
                 ) {
                     Image(painterResource(R.mipmap.ic_no_network), null, Modifier.size(80.dp))

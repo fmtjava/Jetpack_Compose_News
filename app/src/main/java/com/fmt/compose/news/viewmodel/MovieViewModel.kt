@@ -11,7 +11,7 @@ class MovieViewModel : BaseViewModel() {
     fun getMovieLists(apiUrl:String) {
         launch {
             val movieModel = ApiService.getMovies(apiUrl)
-            moviesLiveData.value = movieModel.itemList
+            moviesLiveData.value = movieModel.itemList.reversed()
         }
     }
 }

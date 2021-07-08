@@ -16,7 +16,6 @@ open class BaseViewModel : ViewModel() {
     fun launch(block: suspend CoroutineScope.() -> Unit) {
         viewModelScope.launch {
             try {
-                //stateLiveData.value = State.Loading
                 block()
                 stateLiveData.value = State.Success
             } catch (e: Exception) {

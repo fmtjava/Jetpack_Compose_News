@@ -30,7 +30,7 @@ private val movieTabList = listOf(
         Api.WEEK_MOVIE_URL
     ),
     MovieTabModel(mApp.getString(R.string.monthly_recommend_title), Api.MONTH_MOVIE_URL),
-    MovieTabModel(mApp.getString(R.string.monthly_recommend_title), Api.HISTORICAL_MOVIE_URL)
+    MovieTabModel(mApp.getString(R.string.historical_recommend_title), Api.HISTORICAL_MOVIE_URL)
 )
 
 @OptIn(ExperimentalPagerApi::class)

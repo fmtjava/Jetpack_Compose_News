@@ -1,10 +1,7 @@
 package com.fmt.compose.news.ui.movie
 
 import android.app.Activity
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
@@ -30,6 +27,7 @@ import com.fmt.compose.news.ext.formatDateMsByMS
 import com.fmt.compose.news.model.MovieItemModel
 import com.fmt.compose.news.ui.theme.BgColor
 import com.fmt.compose.news.view.LoadingPage
+import com.fmt.compose.news.view.StaggeredVerticalGrid
 import com.fmt.compose.news.viewmodel.MovieViewModel
 import com.google.accompanist.coil.rememberCoilPainter
 
@@ -44,15 +42,22 @@ fun MovieTabPage(apiUrl: String) {
     LoadingPage(
         state = state!!,
         loadInit = { viewModel.getMovieLists(apiUrl) }) {
-        LazyVerticalGrid(
-            cells = GridCells.Fixed(2),
-            modifier = Modifier
-                .fillMaxSize()
-                .background(BgColor),
-            contentPadding = PaddingValues(5.dp)
-        ) {
-            items(movieList) { item ->
-                MovieItem(item)
+        /* LazyVerticalGrid(
+             cells = GridCells.Fixed(2),
+             modifier = Modifier
+                 .fillMaxSize()
+                 .background(BgColor),
+             contentPadding = PaddingValues(5.dp)
+         ) {
+             items(movieList) { item ->
+                 MovieItem(item)
+             }
+         }*/
+        Column(Modifier.verticalScroll(rememberScrollState())) {
+            StaggeredVerticalGrid(maxColumnWidth = 220.dp, modifier = Modifier.padding(4.dp)) {
+                movieList.forEach {
+                    MovieItem(it)
+                }
             }
         }
     }
@@ -64,11 +69,9 @@ fun MovieItem(model: MovieItemModel) {
     Card(
         Modifier
             .padding(4.dp)
-            .height(210.dp)
     ) {
         Column(
             Modifier
-                .fillMaxSize()
                 .clickable {
                     VideoDetailActivity.go(
                         context as Activity,
@@ -103,17 +106,12 @@ fun MovieItem(model: MovieItemModel) {
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(10.dp, 10.dp, 0.dp, 3.dp)
             )
-            Box(
-                modifier = Modifier
-                    .weight(1f), contentAlignment = Alignment.BottomStart
-            ) {
-                Text(
-                    model.data.category,
-                    fontSize = 13.sp,
-                    color = Color.Gray,
-                    modifier = Modifier.padding(10.dp, 0.dp, 0.dp, 10.dp)
-                )
-            }
+            Text(
+                model.data.category,
+                fontSize = 13.sp,
+                color = Color.Gray,
+                modifier = Modifier.padding(10.dp, 0.dp, 0.dp, 10.dp)
+            )
         }
     }
 }

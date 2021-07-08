@@ -18,20 +18,24 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun TitleBar(text: String, showBack: Boolean = false, backClick: (() -> Unit)? = null) {
-    TopAppBar {
+    TopAppBar(contentPadding = PaddingValues.Absolute()) {
         if (showBack) {
             Box(
                 contentAlignment = Alignment.CenterStart,
                 modifier = Modifier
                     .width(50.dp)
-                    .padding(8.dp, 0.dp)
                     .fillMaxHeight()
                     .clickable {
                         backClick?.invoke()
                     }
 
             ) {
-                Icon(Icons.Default.ArrowBack, null, tint = Color.White)
+                Icon(
+                    Icons.Default.ArrowBack,
+                    null,
+                    tint = Color.White,
+                    modifier = Modifier.padding(15.dp, 0.dp)
+                )
             }
         }
         Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
