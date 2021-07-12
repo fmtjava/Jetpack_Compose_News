@@ -3,11 +3,9 @@ package com.fmt.compose.news
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
@@ -25,7 +23,6 @@ import com.fmt.compose.news.ui.info.NewsPage
 import com.fmt.compose.news.ui.movie.MoviePage
 import com.fmt.compose.news.ui.picture.PicturePage
 import com.fmt.compose.news.ui.theme.Jetpack_Compose_newsTheme
-import com.fmt.compose.news.ui.theme.Purple500
 import com.fmt.compose.news.ui.weather.WeatherPage
 import com.fmt.compose.news.viewmodel.MainViewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -36,7 +33,8 @@ import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
 
-    @OptIn(ExperimentalPagerApi::class)
+    @ExperimentalFoundationApi
+    @ExperimentalPagerApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -94,7 +92,7 @@ fun BottomNavigationAlwaysShowLabelComponent(pagerState: PagerState) {
                     }
                 },
                 label = {
-                    Text(label, color = if (selectedIndex == index) Purple500 else Color.Gray)
+                    Text(label, color = if (selectedIndex == index) MaterialTheme.colors.primary else Color.Gray)
                 },
                 selected = selectedIndex == index,
                 onClick = {
@@ -112,6 +110,6 @@ private fun BottomIcon(imageVector: ImageVector, selectedIndex: Int, index: Int)
     Icon(
         imageVector,
         null,
-        tint = if (selectedIndex == index) Purple500 else Color.Gray
+        tint = if (selectedIndex == index) MaterialTheme.colors.primary else Color.Gray
     )
 }

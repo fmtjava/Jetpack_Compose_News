@@ -8,10 +8,10 @@ class MovieViewModel : BaseViewModel() {
 
     val moviesLiveData = MutableLiveData<List<MovieItemModel>>()
 
-    fun getMovieLists(apiUrl:String) {
+    fun getMovieLists() {
         launch {
-            val movieModel = ApiService.getMovies(apiUrl)
-            moviesLiveData.value = movieModel.itemList.reversed()
+            val movieModel = ApiService.getMovies()
+            moviesLiveData.value = movieModel.itemList
         }
     }
 }

@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.Divider
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -26,10 +27,6 @@ import com.fmt.compose.news.ext.toPx
 import com.fmt.compose.news.model.NewsModelModel
 import com.fmt.compose.news.model.StoryModel
 import com.fmt.compose.news.model.TopStoryModel
-import com.fmt.compose.news.ui.movie.MoviePage
-import com.fmt.compose.news.ui.picture.PicturePage
-import com.fmt.compose.news.ui.theme.Purple500
-import com.fmt.compose.news.ui.weather.WeatherPage
 import com.fmt.compose.news.view.LoadingPage
 import com.fmt.compose.news.view.TitleBar
 import com.fmt.compose.news.viewmodel.NewsViewModel
@@ -95,7 +92,7 @@ fun NewsBanner(topStories: List<TopStoryModel>) {
             modifier = Modifier
                 .padding(6.dp)
                 .align(Alignment.BottomCenter),
-            activeColor = Purple500,
+            activeColor = MaterialTheme.colors.primary,
             inactiveColor = Color.White
         )
     }
