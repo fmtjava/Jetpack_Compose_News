@@ -71,6 +71,7 @@ fun NewsPage() {
 @ExperimentalPagerApi
 @Composable
 fun NewsBanner(topStories: List<TopStoryModel>) {
+    val context = LocalContext.current
     Box(modifier = Modifier.height(200.dp)) {
         val pagerState = rememberPagerState(
             pageCount = topStories.size,
@@ -84,7 +85,11 @@ fun NewsBanner(topStories: List<TopStoryModel>) {
                 painter = rememberCoilPainter(topStories[page].image, fadeIn = true),
                 null,
                 contentScale = ContentScale.FillWidth,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable {
+                        NewsDetailActivity.go(context, topStories[page].title, topStories[page].url)
+                    }
             )
         }
         HorizontalPagerIndicator(
