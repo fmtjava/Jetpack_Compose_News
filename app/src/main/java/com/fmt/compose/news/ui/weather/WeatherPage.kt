@@ -1,6 +1,5 @@
 package com.fmt.compose.news.ui.weather
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
@@ -26,7 +25,6 @@ import com.fmt.compose.news.viewmodel.WeatherViewModel
 
 @Composable
 fun WeatherPage() {
-    Log.e("fmt","WeatherPage")
     val viewModel: WeatherViewModel = viewModel()
     val state by viewModel.stateLiveData.observeAsState()
     val weatherList by viewModel.weatherLiveData.observeAsState(listOf())
