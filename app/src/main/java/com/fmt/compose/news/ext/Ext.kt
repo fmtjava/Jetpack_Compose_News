@@ -1,7 +1,10 @@
 package com.fmt.compose.news.ext
 
+import android.content.Context
 import android.content.res.Resources
+import android.widget.Toast
 import com.fmt.compose.news.mApp
+import com.lzx.starrysky.utils.MainLooper
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -29,4 +32,7 @@ fun getStatusBarHeight(): Int {
     return result
 }
 
+fun Context.showToast(msg: String?) {
+    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+}
 

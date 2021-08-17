@@ -11,6 +11,8 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         mApp = this
-        StarrySky.init(this).apply()
+        StarrySky.init(this)
+            .setNotificationSwitch(true)
+            .apply()
     }
 }
