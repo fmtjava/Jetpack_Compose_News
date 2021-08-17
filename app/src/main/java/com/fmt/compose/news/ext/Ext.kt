@@ -19,4 +19,14 @@ fun getScreenWidth(): Int = Resources.getSystem().displayMetrics.widthPixels
 
 fun getScreenHeight(): Int = Resources.getSystem().displayMetrics.heightPixels
 
+fun getStatusBarHeight(): Int {
+    var result = 0
+    val resourceId =
+        mApp.resources?.getIdentifier("status_bar_height", "dimen", "android")
+    if (resourceId != null && resourceId > 0) {
+        result = mApp.resources?.getDimensionPixelSize(resourceId)!!
+    }
+    return result
+}
+
 

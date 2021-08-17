@@ -2,6 +2,10 @@
     <string name="app_name">爱看</string>
     <string name="information_title">最新资讯</string>
     <string name="pretty_pic_title">美图推荐</string>
+    <string name="recommend_music_title">音乐推荐</string>
+    <string name="recommend_music_list">推荐歌单</string>
+    <string name="pretty_music_list">精选歌单</string>
+    <string name="hot_music_list">最热音乐</string>
     <string name="recommend_movie_title">视频推荐</string>
     <string name="weekly_recommend_title">本周推荐</string>
     <string name="monthly_recommend_title">本月推荐</string>
@@ -13,5 +17,6 @@
     <string name="news_tab_title">新闻</string>
     <string name="video_tab_title">视频</string>
     <string name="pic_tab_title">美图</string>
+    <string name="music_tab_title">音乐</string>
     <string name="weather_tab_title">天气</string>
 </resources>

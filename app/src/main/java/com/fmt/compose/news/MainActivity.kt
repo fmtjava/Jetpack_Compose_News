@@ -7,10 +7,7 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.List
-import androidx.compose.material.icons.filled.Place
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -21,6 +18,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.fmt.compose.news.ui.info.NewsPage
 import com.fmt.compose.news.ui.movie.MoviePage
+import com.fmt.compose.news.ui.music.MusicPage
 import com.fmt.compose.news.ui.picture.PicturePage
 import com.fmt.compose.news.ui.theme.Jetpack_Compose_newsTheme
 import com.fmt.compose.news.ui.weather.WeatherPage
@@ -42,10 +40,10 @@ class MainActivity : ComponentActivity() {
             val selectedIndex by viewModel.getSelectedIndex().observeAsState(0)
             Jetpack_Compose_newsTheme {
                 Column {
-                    val pagerState = rememberPagerState(
-                        pageCount = 4,
+                   /* val pagerState = rememberPagerState(
+                        pageCount = 5,
                         initialPage = selectedIndex,
-                        initialOffscreenLimit = 3
+                        initialOffscreenLimit = 4
                     )
                     HorizontalPager(
                         state = pagerState,
@@ -56,10 +54,12 @@ class MainActivity : ComponentActivity() {
                             0 -> NewsPage()
                             1 -> MoviePage()
                             2 -> PicturePage()
-                            3 -> WeatherPage()
+                            3 -> MusicPage()
+                            4 -> WeatherPage()
                         }
                     }
-                    BottomNavigationAlwaysShowLabelComponent(pagerState)
+                    BottomNavigationAlwaysShowLabelComponent(pagerState)*/
+                    MusicPage()
                 }
             }
         }
@@ -70,6 +70,7 @@ val listItems = listOf(
     mApp.getString(R.string.news_tab_title),
     mApp.getString(R.string.video_tab_title),
     mApp.getString(R.string.pic_tab_title),
+    mApp.getString(R.string.music_tab_title),
     mApp.getString(R.string.weather_tab_title)
 )
 
@@ -88,11 +89,15 @@ fun BottomNavigationAlwaysShowLabelComponent(pagerState: PagerState) {
                         0 -> BottomIcon(Icons.Filled.Home, selectedIndex, index)
                         1 -> BottomIcon(Icons.Filled.List, selectedIndex, index)
                         2 -> BottomIcon(Icons.Filled.Favorite, selectedIndex, index)
-                        3 -> BottomIcon(Icons.Filled.Place, selectedIndex, index)
+                        3 -> BottomIcon(Icons.Filled.ThumbUp, selectedIndex, index)
+                        4 -> BottomIcon(Icons.Filled.Place, selectedIndex, index)
                     }
                 },
                 label = {
-                    Text(label, color = if (selectedIndex == index) MaterialTheme.colors.primary else Color.Gray)
+                    Text(
+                        label,
+                        color = if (selectedIndex == index) MaterialTheme.colors.primary else Color.Gray
+                    )
                 },
                 selected = selectedIndex == index,
                 onClick = {

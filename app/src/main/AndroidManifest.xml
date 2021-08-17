@@ -45,6 +45,9 @@
             android:name=".ui.picture.PhotoActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+        <activity
+            android:name=".ui.music.MusicDetailActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

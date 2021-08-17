@@ -22,6 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import coil.compose.rememberImagePainter
 import com.fmt.compose.news.R
 import com.fmt.compose.news.ext.formatDateMsByMS
 import com.fmt.compose.news.model.MovieItemModel
@@ -29,7 +30,6 @@ import com.fmt.compose.news.view.LoadingPage
 import com.fmt.compose.news.view.StaggeredVerticalGrid
 import com.fmt.compose.news.view.TitleBar
 import com.fmt.compose.news.viewmodel.MovieViewModel
-import com.google.accompanist.coil.rememberCoilPainter
 
 @Composable
 fun MoviePage() {
@@ -72,9 +72,11 @@ fun MovieItem(model: MovieItemModel) {
                 }) {
             Box {
                 Image(
-                    painter = rememberCoilPainter(
-                        model.data.cover.feed,
-                        fadeIn = true,
+                    painter = rememberImagePainter(
+                        data = model.data.cover.feed,
+                        builder = {
+                            crossfade(true)
+                        }
                     ),
                     null,
                     contentScale = ContentScale.FillHeight,

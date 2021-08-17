@@ -1,6 +1,5 @@
 package com.fmt.compose.news.ui.info
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -12,7 +11,6 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,6 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import coil.compose.rememberImagePainter
 import coil.transform.RoundedCornersTransformation
 import com.fmt.compose.news.R
 import com.fmt.compose.news.ext.toPx
@@ -32,7 +31,6 @@ import com.fmt.compose.news.model.TopStoryModel
 import com.fmt.compose.news.view.LoadingPage
 import com.fmt.compose.news.view.TitleBar
 import com.fmt.compose.news.viewmodel.NewsViewModel
-import com.google.accompanist.coil.rememberCoilPainter
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
@@ -84,7 +82,9 @@ fun NewsBanner(topStories: List<TopStoryModel>) {
             modifier = Modifier.fillMaxSize()
         ) { page ->
             Image(
-                painter = rememberCoilPainter(topStories[page].image, fadeIn = true),
+                painter = rememberImagePainter(data = topStories[page].image, builder = {
+                    crossfade(true)
+                }),
                 null,
                 contentScale = ContentScale.FillWidth,
                 modifier = Modifier
@@ -115,7 +115,8 @@ fun NewsItem(model: StoryModel) {
                 NewsDetailActivity.go(context, model.title, model.url)
             }) {
         Image(
-            painter = rememberCoilPainter(model.images[0], fadeIn = true, requestBuilder = {
+            painter = rememberImagePainter(data = model.images[0], builder = {
+                crossfade(true)
                 transformations(RoundedCornersTransformation(2.toPx().toFloat()))
             }),
             null,

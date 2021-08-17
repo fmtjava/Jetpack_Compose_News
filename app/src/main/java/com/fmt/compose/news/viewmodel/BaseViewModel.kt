@@ -15,11 +15,12 @@ open class BaseViewModel : ViewModel() {
 
     fun launch(block: suspend CoroutineScope.() -> Unit) {
         viewModelScope.launch {
-            try {
+            kotlin.runCatching {
                 block()
+            }.onSuccess {
                 stateLiveData.value = State.Success
-            } catch (e: Exception) {
-                stateLiveData.value = State.Error(e.message)
+            }.onFailure {
+                stateLiveData.value = State.Error(it.message)
             }
         }
     }

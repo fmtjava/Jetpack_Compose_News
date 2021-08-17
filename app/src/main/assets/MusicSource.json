@@ -1,0 +1,58 @@
+[
+  {
+    "musicId": "7",
+    "name": "Nostalgic Piano",
+    "poster": "http://res.lgdsunday.club/poster-1.png",
+    "path": "http://res.lgdsunday.club/Nostalgic%20Piano.mp3",
+    "author": "Rafael Krux"
+  },
+  {
+    "musicId": "8",
+    "name": "La Citadelle",
+    "poster": "http://res.lgdsunday.club/poster-2.png",
+    "path": "http://res.lgdsunday.club/La%20Citadelle.mp3",
+    "author": "Komiku"
+  },
+  {
+    "musicId": "9",
+    "name": "Champ de tournesol",
+    "poster": "http://res.lgdsunday.club/poster-3.png",
+    "path": "http://res.lgdsunday.club/Champ%20de%20tournesol.mp3",
+    "author": "Komiku"
+  },
+  {
+    "musicId": "10",
+    "name": "Horizon Flare",
+    "poster": "http://res.lgdsunday.club/poster-4.png",
+    "path": "http://res.lgdsunday.club/Horizon%20Flare.mp3",
+    "author": "Alexander Nakarada"
+  },
+  {
+    "musicId": "11",
+    "name": "Lovely Piano Song",
+    "poster": "http://res.lgdsunday.club/poster-5.png",
+    "path": "http://res.lgdsunday.club/Lovely%20Piano%20Song.mp3",
+    "author": "Rafael Krux"
+  },
+  {
+    "musicId": "12",
+    "name": "Romantic Inspiration",
+    "poster": "http://res.lgdsunday.club/poster-6.png",
+    "path": "http://res.lgdsunday.club/Romantic%20Inspiration.mp3",
+    "author": "Rafael Krux"
+  },
+  {
+    "musicId": "13",
+    "name": "Brothers Unite",
+    "poster": "http://res.lgdsunday.club/poster-7.png",
+    "path": "http://res.lgdsunday.club/Brothers%20Unite.mp3",
+    "author": "Alexander Nakarada"
+  },
+  {
+    "musicId": "14",
+    "name": "Amazing Grace",
+    "poster": "http://res.lgdsunday.club/poster-8.png",
+    "path": "http://res.lgdsunday.club/Amazing%20Grace.mp3",
+    "author": "Kevin MacLeod"
+  }
+]

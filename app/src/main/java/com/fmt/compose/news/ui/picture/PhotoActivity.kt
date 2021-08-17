@@ -27,9 +27,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import coil.annotation.ExperimentalCoilApi
+import coil.compose.ImagePainter
+import coil.compose.rememberImagePainter
 import com.fmt.compose.news.R
-import com.google.accompanist.coil.rememberCoilPainter
-import com.google.accompanist.imageloading.ImageLoadState
 
 class PhotoActivity : ComponentActivity() {
 
@@ -66,6 +67,7 @@ class PhotoActivity : ComponentActivity() {
     }
 }
 
+@OptIn(ExperimentalCoilApi::class)
 @Composable
 fun PhotoViewPage(url: String, click: () -> Unit) {
     var scale by remember { mutableStateOf(1f) }
@@ -77,9 +79,11 @@ fun PhotoViewPage(url: String, click: () -> Unit) {
 
         rotation += rotationChange
     }
-    val painter = rememberCoilPainter(
-        url,
-        fadeIn = true
+    val painter = rememberImagePainter(
+        data = url,
+        builder = {
+            crossfade(true)
+        }
     )
     Box(
         Modifier
@@ -100,7 +104,7 @@ fun PhotoViewPage(url: String, click: () -> Unit) {
                 .fillMaxSize()
         )
 
-        if (painter.loadState is ImageLoadState.Loading) {
+        if (painter.state is  ImagePainter.State.Loading) {
             CircularProgressIndicator(Modifier.align(Alignment.Center))
         }
 
