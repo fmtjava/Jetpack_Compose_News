@@ -32,6 +32,8 @@ import com.fmt.compose.news.utils.HiStatusBar
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
+import com.lzx.starrysky.SongInfo
+import com.lzx.starrysky.StarrySky
 import kotlinx.coroutines.flow.collect
 import java.util.*
 
@@ -69,6 +71,10 @@ class MusicDetailActivity : ComponentActivity() {
             statusBarColor = Color.TRANSPARENT,
             translucent = true
         )
+        val info = SongInfo()
+        info.songId = mMusicList[mPlayItemPosition].musicId
+        info.songUrl = mMusicList[mPlayItemPosition].path
+        StarrySky.with().playMusicByInfo(info)
         setContent {
             Box(Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
                 BlurImageView(mMusicList[mSelectState].poster, Modifier.fillMaxSize())
