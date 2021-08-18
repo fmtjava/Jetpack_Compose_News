@@ -13,14 +13,20 @@ import androidx.compose.animation.core.*
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Slider
+import androidx.compose.material.SliderDefaults
+import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import coil.compose.rememberImagePainter
 import coil.load
@@ -29,15 +35,19 @@ import coil.transform.CircleCropTransformation
 import com.fmt.compose.news.R
 import com.fmt.compose.news.ext.showToast
 import com.fmt.compose.news.ui.music.db.Music
+import com.fmt.compose.news.ui.theme.BgColor
 import com.fmt.compose.news.utils.HiStatusBar
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
+import com.lzx.starrysky.OnPlayProgressListener
 import com.lzx.starrysky.SongInfo
 import com.lzx.starrysky.StarrySky
 import com.lzx.starrysky.manager.PlaybackStage
+import com.lzx.starrysky.utils.formatTime
 import kotlinx.coroutines.flow.collect
 import java.util.*
+import kotlin.math.roundToInt
 
 class MusicDetailActivity : ComponentActivity() {
 
@@ -47,6 +57,10 @@ class MusicDetailActivity : ComponentActivity() {
     private var mSelectItemPosition by mutableStateOf(0)
     private var mSelectPlayUrl by mutableStateOf("")
     private var mPlayOrPauseIcon by mutableStateOf(R.mipmap.ic_play_btn_pause)
+    private var mProgress by mutableStateOf(0f)
+    private var mCurrTimeText by mutableStateOf("")
+    private var mTotalTimeText by mutableStateOf("")
+    private var mCurrentMusicTotalTime = 0L
 
     companion object {
         private const val MUSIC_LIST = "music_list"
@@ -77,6 +91,7 @@ class MusicDetailActivity : ComponentActivity() {
                 BlurImageView(mSelectPlayUrl)
                 DisBackground()
                 DisViewPage(musicList = mMusicList, mSelectItemPosition)
+                SingerInfoView()
                 NeedleView()
                 OperateView()
             }
@@ -110,6 +125,7 @@ class MusicDetailActivity : ComponentActivity() {
 
     private fun initStarrySky() {
         playMusicWithList(mPlayItemPosition)
+        //监听播放状态
         StarrySky.with().playbackState().observe(this) {
             when (it.stage) {
                 PlaybackStage.PLAYING -> {
@@ -129,6 +145,18 @@ class MusicDetailActivity : ComponentActivity() {
                 }
             }
         }
+        //监听播放进度
+        StarrySky.with().setOnPlayProgressListener(object : OnPlayProgressListener {
+            override fun onPlayProgress(currPos: Long, duration: Long) {
+                //计算当前的播放进度
+                mProgress = ((currPos * 100 / duration).toFloat().roundToInt() / 100.0).toFloat()
+                //计算当前时间
+                mCurrTimeText = currPos.formatTime()
+                //计算总时间
+                mTotalTimeText = duration.formatTime()
+                mCurrentMusicTotalTime = duration;
+            }
+        })
     }
 
     private fun findPositionById(songId: String): Int {
@@ -142,6 +170,7 @@ class MusicDetailActivity : ComponentActivity() {
         return selectIndex
     }
 
+    //播放列表指定位置的音乐
     private fun playMusicWithList(playItemPosition: Int) {
         StarrySky.with().playMusic(mMediaList, playItemPosition)
     }
@@ -173,9 +202,23 @@ class MusicDetailActivity : ComponentActivity() {
             painter = painterResource(R.mipmap.ic_disc_blackground),
             contentDescription = null,
             Modifier
-                .padding(top = 123.dp)
+                .padding(top = 183.dp)
                 .size(274.dp)
         )
+    }
+
+    @Composable
+    private fun SingerInfoView() {
+        Column(Modifier.padding(top = 45.dp)) {
+            Text(
+                mMusicList[mPlayItemPosition].author,
+                style = TextStyle(color = White, fontSize = 14.sp)
+            )
+            Text(
+                mMusicList[mPlayItemPosition].name,
+                style = TextStyle(color = BgColor, fontSize = 12.sp)
+            )
+        }
     }
 
     @Composable
@@ -184,7 +227,9 @@ class MusicDetailActivity : ComponentActivity() {
         Image(
             painter = painterResource(R.mipmap.ic_needle),
             contentDescription = null,
-            Modifier.padding(start = 60.dp, top = 45.dp)
+            Modifier
+                .padding(start = 60.dp, top = 100.dp)
+                .size(138.dp)
         )
     }
 
@@ -194,7 +239,7 @@ class MusicDetailActivity : ComponentActivity() {
         Log.e("fmt", "DisViewPage")
         val pagerState = rememberPagerState(
             pageCount = mMusicList.size,
-            initialPage = 0,
+            initialPage = selectItem,
             initialOffscreenLimit = 2,
             infiniteLoop = true
         )
@@ -218,7 +263,7 @@ class MusicDetailActivity : ComponentActivity() {
                     contentDescription = null,
                     contentScale = ContentScale.Inside,
                     modifier = Modifier
-                        .padding(top = 59.dp)
+                        .padding(top = 119.dp)
                         .size(402.dp)
                 )
                 Image(
@@ -232,7 +277,7 @@ class MusicDetailActivity : ComponentActivity() {
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
-                        .padding(top = 60.dp)
+                        .padding(top = 120.dp)
                         .size(178.dp)
                         .rotate(rotation)
                 )
@@ -258,39 +303,63 @@ class MusicDetailActivity : ComponentActivity() {
 
     @Composable
     fun OperateView() {
-        Box(
+        Log.e("fmt", "OperateView")
+        Column(
             Modifier
                 .fillMaxHeight()
-                .padding(20.dp), contentAlignment = Alignment.BottomCenter
+                .padding(20.dp),
+            verticalArrangement = Arrangement.Bottom,
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Image(
-                    painter = painterResource(R.mipmap.ic_play_btn_prev),
-                    contentDescription = null,
-                    Modifier.clickable {
-                        StarrySky.with().skipToPrevious()
-                    }
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(mCurrTimeText, style = TextStyle(color = White, fontSize = 10.sp))
+                Slider(
+                    value = mProgress,
+                    onValueChange = { pos ->
+                        mProgress = pos
+                        Log.e("fmt", "pos=$pos")
+                        StarrySky.with().seekTo((pos * mCurrentMusicTotalTime).toLong(), true)
+                    },
+                    Modifier.weight(1f),
+                    colors = SliderDefaults.colors(
+                        thumbColor = White,
+                        inactiveTickColor = BgColor,
+                        activeTrackColor = White
+                    )
                 )
-                Image(
-                    painter = painterResource(mPlayOrPauseIcon),
-                    contentDescription = null,
-                    Modifier.clickable {
-                        if (StarrySky.with().isPlaying()) {
-                            StarrySky.with().pauseMusic()
-                        } else {
-                            StarrySky.with().restoreMusic()
+                Text(mTotalTimeText, style = TextStyle(color = White, fontSize = 10.sp))
+            }
+            Box(contentAlignment = Alignment.Center) {
+                Log.e("fmt", "Bootom BOX")
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Image(
+                        painter = painterResource(R.mipmap.ic_play_btn_prev),
+                        contentDescription = null,
+                        Modifier.clickable {
+                            StarrySky.with().skipToPrevious()
                         }
-                    }
-                )
-                Image(
-                    painter = painterResource(R.mipmap.ic_play_btn_next),
-                    contentDescription = null,
-                    Modifier.clickable {
-                        StarrySky.with().skipToNext()
-                    }
-                )
+                    )
+                    Image(
+                        painter = painterResource(mPlayOrPauseIcon),
+                        contentDescription = null,
+                        Modifier.clickable {
+                            if (StarrySky.with().isPlaying()) {
+                                StarrySky.with().pauseMusic()
+                            } else {
+                                StarrySky.with().restoreMusic()
+                            }
+                        }
+                    )
+                    Image(
+                        painter = painterResource(R.mipmap.ic_play_btn_next),
+                        contentDescription = null,
+                        Modifier.clickable {
+                            StarrySky.with().skipToNext()
+                        }
+                    )
+                }
             }
         }
     }

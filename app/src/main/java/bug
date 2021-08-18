@@ -1,0 +1,5 @@
+java.lang.ArithmeticException: divide by zero
+        at com.fmt.compose.news.ui.music.MusicDetailActivity$initStarrySky$2.onPlayProgress(MusicDetailActivity.kt:152)
+        at com.lzx.starrysky.control.PlayerControl._init_$lambda-1(PlayerControl.kt:53)
+        at com.lzx.starrysky.control.PlayerControl.$r8$lambda$lQMJOYXr30Ev69xzJlLPBuAVxS8(Unknown Source:0)
+        at com.lzx.starrysky.control.PlayerControl$$ExternalSyntheticLambda0.run(Unknown Source:2)

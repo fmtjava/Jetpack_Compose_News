@@ -3,6 +3,8 @@ package com.fmt.compose.news
 import org.junit.Test
 
 import org.junit.Assert.*
+import java.math.BigDecimal
+import kotlin.math.roundToInt
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -12,6 +14,7 @@ import org.junit.Assert.*
 class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+
+        print("result=${(46 * 100 / 90).toDouble().roundToInt() /100.0}")
     }
 }
