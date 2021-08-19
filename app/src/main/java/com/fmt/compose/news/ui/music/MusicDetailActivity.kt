@@ -47,11 +47,12 @@ import com.lzx.starrysky.manager.PlaybackStage
 import com.lzx.starrysky.utils.formatTime
 import kotlinx.coroutines.flow.collect
 import java.util.*
+import kotlin.concurrent.thread
 import kotlin.math.roundToInt
 
 class MusicDetailActivity : ComponentActivity() {
 
-    lateinit var mMusicList: ArrayList<Music>
+    private lateinit var mMusicList: ArrayList<Music>
     private val mMediaList by lazy { mutableListOf<SongInfo>() }
     private var mPlayItemPosition = 0
     private var mSelectItemPosition by mutableStateOf(0)
@@ -60,6 +61,7 @@ class MusicDetailActivity : ComponentActivity() {
     private var mProgress by mutableStateOf(0f)
     private var mCurrTimeText by mutableStateOf("")
     private var mTotalTimeText by mutableStateOf("")
+    private var mIsPause by mutableStateOf(false)
     private var mCurrentMusicTotalTime = 0L
 
     companion object {
@@ -129,6 +131,7 @@ class MusicDetailActivity : ComponentActivity() {
         StarrySky.with().playbackState().observe(this) {
             when (it.stage) {
                 PlaybackStage.PLAYING -> {
+                    mIsPause = false
                     mPlayOrPauseIcon = R.mipmap.ic_play_btn_pause
                 }
                 //切歌
@@ -138,6 +141,7 @@ class MusicDetailActivity : ComponentActivity() {
                 }
                 PlaybackStage.PAUSE,
                 PlaybackStage.IDLE -> {
+                    mIsPause = true
                     mPlayOrPauseIcon = R.mipmap.ic_play_btn_play
                 }
                 PlaybackStage.ERROR -> {
@@ -148,17 +152,21 @@ class MusicDetailActivity : ComponentActivity() {
         //监听播放进度
         StarrySky.with().setOnPlayProgressListener(object : OnPlayProgressListener {
             override fun onPlayProgress(currPos: Long, duration: Long) {
-                //计算当前的播放进度
-                mProgress = ((currPos * 100 / duration).toFloat().roundToInt() / 100.0).toFloat()
-                //计算当前时间
-                mCurrTimeText = currPos.formatTime()
-                //计算总时间
-                mTotalTimeText = duration.formatTime()
-                mCurrentMusicTotalTime = duration;
+                if (duration > 0) {
+                    //计算当前的播放进度
+                    mProgress =
+                        ((currPos * 100 / duration).toFloat().roundToInt() / 100.0).toFloat()
+                    //计算当前时间
+                    mCurrTimeText = currPos.formatTime()
+                    //计算总时间
+                    mTotalTimeText = duration.formatTime()
+                    mCurrentMusicTotalTime = duration
+                }
             }
         })
     }
 
+    //查询播放下标
     private fun findPositionById(songId: String): Int {
         var selectIndex = 0
         mMusicList.forEachIndexed { index, music ->
@@ -250,7 +258,9 @@ class MusicDetailActivity : ComponentActivity() {
         ) { page ->
             val infiniteTransition = rememberInfiniteTransition()
             val rotation by infiniteTransition.animateFloat(
-                initialValue = 0f, targetValue = 360f, animationSpec = infiniteRepeatable(
+                initialValue = 0f,
+                targetValue = 360f,
+                animationSpec = infiniteRepeatable(
                     animation = tween(
                         durationMillis = 30000,
                         easing = LinearEasing
@@ -311,7 +321,7 @@ class MusicDetailActivity : ComponentActivity() {
             verticalArrangement = Arrangement.Bottom,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                 Text(mCurrTimeText, style = TextStyle(color = White, fontSize = 10.sp))
                 Slider(
                     value = mProgress,
