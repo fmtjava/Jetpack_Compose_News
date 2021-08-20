@@ -32,6 +32,8 @@ import coil.compose.rememberImagePainter
 import coil.load
 import coil.transform.BlurTransformation
 import coil.transform.CircleCropTransformation
+import com.fmt.compose.news.MainActivity
+import com.fmt.compose.news.MainActivity.AnimationState.PAUSED
 import com.fmt.compose.news.R
 import com.fmt.compose.news.ext.showToast
 import com.fmt.compose.news.ui.music.db.Music
@@ -61,8 +63,8 @@ class MusicDetailActivity : ComponentActivity() {
     private var mProgress by mutableStateOf(0f)
     private var mCurrTimeText by mutableStateOf("")
     private var mTotalTimeText by mutableStateOf("")
-    private var mIsPause by mutableStateOf(false)
     private var mCurrentMusicTotalTime = 0L
+    var animationState by mutableStateOf(MainActivity.AnimationState.RUNNING)
 
     companion object {
         private const val MUSIC_LIST = "music_list"
@@ -92,7 +94,7 @@ class MusicDetailActivity : ComponentActivity() {
                 Log.e("fmt", "Box")
                 BlurImageView(mSelectPlayUrl)
                 DisBackground()
-                DisViewPage(musicList = mMusicList, mSelectItemPosition)
+                DisViewPage(musicList = mMusicList, mPlayItemPosition)
                 SingerInfoView()
                 NeedleView()
                 OperateView()
@@ -131,7 +133,7 @@ class MusicDetailActivity : ComponentActivity() {
         StarrySky.with().playbackState().observe(this) {
             when (it.stage) {
                 PlaybackStage.PLAYING -> {
-                    mIsPause = false
+                    animationState = MainActivity.AnimationState.RUNNING
                     mPlayOrPauseIcon = R.mipmap.ic_play_btn_pause
                 }
                 //切歌
@@ -141,7 +143,7 @@ class MusicDetailActivity : ComponentActivity() {
                 }
                 PlaybackStage.PAUSE,
                 PlaybackStage.IDLE -> {
-                    mIsPause = true
+                    animationState = MainActivity.AnimationState.PAUSED
                     mPlayOrPauseIcon = R.mipmap.ic_play_btn_play
                 }
                 PlaybackStage.ERROR -> {
@@ -256,7 +258,7 @@ class MusicDetailActivity : ComponentActivity() {
             modifier = Modifier
                 .fillMaxWidth(),
         ) { page ->
-            val infiniteTransition = rememberInfiniteTransition()
+            /*val infiniteTransition = rememberInfiniteTransition()
             val rotation by infiniteTransition.animateFloat(
                 initialValue = 0f,
                 targetValue = 360f,
@@ -266,7 +268,33 @@ class MusicDetailActivity : ComponentActivity() {
                         easing = LinearEasing
                     )
                 )
-            )
+            )*/
+
+            val animation = remember {
+                TargetBasedAnimation(
+                    animationSpec = infiniteRepeatable(
+                        animation = tween(
+                            durationMillis = 20000,
+                            easing = LinearEasing
+                        )
+                    ),
+                    typeConverter = Float.VectorConverter,
+                    initialValue = 0f,
+                    targetValue = 360f
+                )
+            }
+
+            var playTime by remember { mutableStateOf(0L) }
+            var animationValue by remember { mutableStateOf(0f) }
+
+            LaunchedEffect(key1 = animation,key2 = animationState){
+                val startTime = withFrameNanos { it } - playTime
+                while (animationState == MainActivity.AnimationState.RUNNING) {
+                    playTime = withFrameNanos { it } - startTime
+                    animationValue = animation.getValueFromNanos(playTime)
+                }
+            }
+
             Box(contentAlignment = Alignment.Center) {
                 Image(
                     painter = painterResource(R.mipmap.ic_disc),
@@ -289,7 +317,7 @@ class MusicDetailActivity : ComponentActivity() {
                     modifier = Modifier
                         .padding(top = 120.dp)
                         .size(178.dp)
-                        .rotate(rotation)
+                        .rotate(animationValue)
                 )
             }
         }
