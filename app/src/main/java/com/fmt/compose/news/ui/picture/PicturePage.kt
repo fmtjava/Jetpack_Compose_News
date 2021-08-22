@@ -27,9 +27,8 @@ import com.fmt.compose.news.viewmodel.PictureViewModel
 
 @ExperimentalFoundationApi
 @Composable
-fun PicturePage() {
+fun PicturePage(viewModel: PictureViewModel = viewModel()) {
     val context = LocalContext.current
-    val viewModel: PictureViewModel = viewModel()
     val state by viewModel.stateLiveData.observeAsState()
     val picList by viewModel.picLiveData.observeAsState(listOf())
 

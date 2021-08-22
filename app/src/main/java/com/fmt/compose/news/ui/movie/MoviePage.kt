@@ -32,11 +32,10 @@ import com.fmt.compose.news.view.TitleBar
 import com.fmt.compose.news.viewmodel.MovieViewModel
 
 @Composable
-fun MoviePage() {
+fun MoviePage(viewModel: MovieViewModel = viewModel()) {
     Column(Modifier.fillMaxSize()) {
         TitleBar(text = stringResource(id = R.string.recommend_movie_title))
 
-        val viewModel: MovieViewModel = viewModel()
         val state by viewModel.stateLiveData.observeAsState()
         val movieList by viewModel.moviesLiveData.observeAsState(listOf())
 

@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.ViewGroup
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -17,11 +16,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
 import cn.jzvd.Jzvd
 import cn.jzvd.JzvdStd
+import com.fmt.compose.news.BaseActivity
 import com.fmt.compose.news.R
 import com.fmt.compose.news.ext.toPx
 import com.fmt.compose.news.ui.picture.BackArrowDown
 
-class VideoDetailActivity : ComponentActivity() {
+class VideoDetailActivity : BaseActivity() {
 
     companion object {
         private const val VIDEO_URL = "video_url"
@@ -63,14 +63,6 @@ class VideoDetailActivity : ComponentActivity() {
     override fun onPause() {
         super.onPause()
         Jzvd.releaseAllVideos()
-    }
-
-    override fun finish() {
-        super.finish()
-        overridePendingTransition(
-            0,
-            R.anim.slide_bottom_out
-        )
     }
 }
 

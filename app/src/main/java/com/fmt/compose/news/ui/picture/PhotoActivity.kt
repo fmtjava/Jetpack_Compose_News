@@ -3,7 +3,6 @@ package com.fmt.compose.news.ui.picture
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -30,9 +29,10 @@ import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
+import com.fmt.compose.news.BaseActivity
 import com.fmt.compose.news.R
 
-class PhotoActivity : ComponentActivity() {
+class PhotoActivity : BaseActivity() {
 
     companion object {
         const val PHOTO_URL = "photo_url"
@@ -56,14 +56,6 @@ class PhotoActivity : ComponentActivity() {
                 finish()
             }
         }
-    }
-
-    override fun finish() {
-        super.finish()
-        overridePendingTransition(
-            0,
-            R.anim.slide_bottom_out
-        )
     }
 }
 

@@ -31,9 +31,8 @@ import com.fmt.compose.news.view.TitleBar
 import com.fmt.compose.news.viewmodel.MusicViewModel
 
 @Composable
-fun MusicPage() {
+fun MusicPage(viewModel: MusicViewModel = viewModel()) {
 
-    val viewModel: MusicViewModel = viewModel()
     val musicList by viewModel.getMusicList().observeAsState(arrayListOf())
 
     Column(

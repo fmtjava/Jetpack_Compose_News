@@ -38,8 +38,7 @@ import com.google.accompanist.pager.rememberPagerState
 
 @ExperimentalPagerApi
 @Composable
-fun NewsPage() {
-    val viewMode: NewsViewModel = viewModel()
+fun NewsPage(viewMode: NewsViewModel = viewModel()) {
     val state by viewMode.stateLiveData.observeAsState()
     val newsModel by viewMode.newsLiveData.observeAsState(NewsModelModel())
     LoadingPage(state = state!!,
