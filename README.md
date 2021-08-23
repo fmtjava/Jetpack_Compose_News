@@ -26,6 +26,13 @@
 </div>
 <br/>
 
+<div style="float:right">
+  <img src="http://m.qpic.cn/psc?/V526iEgm3HgG9w0K6aQL2X9HJE4OnV96/45NBuzDIW489QBoVep5mcSuPWjX.51wvWJmaPWbGnx7qJOZp8xgQ6PkMRDZKVdY5hL9y*PSQcV55D5EDAGEW5MihMRH4OB.AwZgygMRYOR8!/b&bo=OARwCAAAAAABF3Q!&rf=viewer_4" width="270"/>&nbsp;&nbsp;&nbsp;
+  <img src="http://m.qpic.cn/psc?/V526iEgm3HgG9w0K6aQL2X9HJE4OnV96/45NBuzDIW489QBoVep5mcZLnnAOG7l4.LC*eJ*3vQ1IFMiqQDcEWUC.j5mVAkhHySfuPGzL8KP9t*Z3lGR2jInGgryzw94*M7Lt71HJ5P4s!/b&bo=OARwCAAAAAABF3Q!&rf=viewer_4" width="270"/>&nbsp;&nbsp;&nbsp;
+  <img src="http://m.qpic.cn/psc?/V526iEgm3HgG9w0K6aQL2X9HJE4OnV96/45NBuzDIW489QBoVep5mcSuPWjX.51wvWJmaPWbGnx4lu6R*bTt.7HhgfxtZsG7X4Hzgbd*0wAvhRhduw0Qb758g75H1PzdYBdKpxh60Hq4!/b&bo=OARwCAAAAAABF3Q!&rf=viewer_4" width="260"/>
+</div>
+<br/>
+
 # 核心功能
 <div>
   <img src="http://m.qpic.cn/psc?/V526iEgm3HgG9w0K6aQL2X9HJE4OnV96/45NBuzDIW489QBoVep5mcblBQyR*hDgVpPwm.8ErLzZhnBeTNwrFF.hgw8apWBBa*Vx64EoD24Godj.Wpz2Jui0ibnoVfLhnHo1TKAGc7ig!/b&bo=3Q1BAwAAAAADJ5A!&rf=viewer_4"/>
@@ -44,11 +51,13 @@
 # 更新日志
  ### v1.0
    * 初始化项目，完成爱看App核心功能，目前实现引导页、新闻、视频、美图、天气、新闻详情、视频播放等功能，后续持续完善中...
+### v1.1
+   * 新增音乐播放列表以及音乐播放详情页面
 
 # 感谢
   - [accompanist](https://github.com/google/accompanist)
   - [JiaoZiVideoPlayer](https://github.com/Jzvd/JZVideo)
-  - [Banner](https://github.com/youth5201314/banner)
+  - [starrysky](https://github.com/EspoirX/StarrySky/)
   - [retrofit2](https://github.com/square/retrofit)
   - [干货集中营](https://gank.io/)
   - [Nowapi](https://www.nowapi.com/)

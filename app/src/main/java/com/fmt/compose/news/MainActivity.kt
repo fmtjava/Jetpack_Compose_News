@@ -1,10 +1,6 @@
 package com.fmt.compose.news
 
-import android.animation.ObjectAnimator
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
-import android.widget.ImageView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -44,7 +40,7 @@ class MainActivity : ComponentActivity() {
             val selectedIndex by viewModel.getSelectedIndex().observeAsState(0)
             Jetpack_Compose_newsTheme {
                 Column {
-                    /*val pagerState = rememberPagerState(
+                    val pagerState = rememberPagerState(
                         pageCount = 5,
                         initialPage = selectedIndex,
                         initialOffscreenLimit = 4
@@ -62,8 +58,7 @@ class MainActivity : ComponentActivity() {
                             4 -> WeatherPage()
                         }
                     }
-                    BottomNavigationAlwaysShowLabelComponent(pagerState)*/
-                    MusicPage()
+                    BottomNavigationAlwaysShowLabelComponent(pagerState)
                 }
             }
         }
