@@ -14,11 +14,9 @@ object SpUtils {
 
     fun getBoolean(name: String): Boolean = prefs.getBoolean(name, false)
 
-    fun setBoolean(name: String, value: Boolean) {
+    fun setBoolean(name: String, value: Boolean) =
         with(prefs.edit()) {
             putBoolean(name, value)
             apply()
         }
-    }
-
 }

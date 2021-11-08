@@ -1,22 +1,17 @@
 package com.fmt.compose.news.ext
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
 import android.widget.Toast
 import com.fmt.compose.news.mApp
-import com.lzx.starrysky.utils.MainLooper
 import java.text.SimpleDateFormat
 import java.util.*
 
-fun Int.toPx(): Int {
-    val scale = mApp.resources.displayMetrics.density
-    return (this * scale + 0.5f).toInt()
-}
+fun Int.toPx(): Int = (this * mApp.resources.displayMetrics.density + 0.5f).toInt()
 
-fun formatDateMsByMS(milliseconds: Long): String {
-    val simpleDateFormat = SimpleDateFormat("mm:ss")
-    return simpleDateFormat.format(Date(milliseconds))
-}
+@SuppressLint("SimpleDateFormat")
+fun formatDateMsByMS(milliseconds: Long): String = SimpleDateFormat("mm:ss").format(Date(milliseconds))
 
 fun getScreenWidth(): Int = Resources.getSystem().displayMetrics.widthPixels
 
@@ -32,7 +27,6 @@ fun getStatusBarHeight(): Int {
     return result
 }
 
-fun Context.showToast(msg: String?) {
-    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
-}
+fun Context.showToast(msg: String?) = Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+
 

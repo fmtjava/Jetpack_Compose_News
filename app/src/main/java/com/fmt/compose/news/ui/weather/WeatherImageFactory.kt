@@ -4,8 +4,8 @@ import com.fmt.compose.news.R
 
 object WeatherImageFactory {
 
-    fun getWeatherImage(weather: String): Int {
-        return if (weather == "多云" || weather == "多云转阴" || weather == "多云转晴") {
+    fun getWeatherImage(weather: String): Int =
+        if (weather == "多云" || weather == "多云转阴" || weather == "多云转晴") {
             R.mipmap.biz_plugin_weather_duoyun
         } else if (weather == "中雨" || weather == "中到大雨") {
             R.mipmap.biz_plugin_weather_zhongyu
@@ -48,5 +48,4 @@ object WeatherImageFactory {
         } else {
             R.mipmap.biz_plugin_weather_duoyun
         }
-    }
 }
