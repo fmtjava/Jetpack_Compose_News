@@ -10,7 +10,10 @@ class PictureViewModel : BaseViewModel() {
 
     fun getPicList() {
         launch {
-            val pics = ApiService.getPics().data
+            val pics = ApiService.getPics().list
+            pics.forEach {
+                it.url800 = "https:${it.url800}"
+            }
             picLiveData.value = pics
         }
     }

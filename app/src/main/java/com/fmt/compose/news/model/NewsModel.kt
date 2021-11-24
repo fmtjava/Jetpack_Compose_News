@@ -1,11 +1,8 @@
 package com.fmt.compose.news.model
 
 class PageModel<T>(
-    val page: Int,
-    val page_count: Int,
-    val status: Int,
-    val total_counts: Int,
-    val data: T
+    val totalNum: Int,
+    val list: T
 )
 
 class NewsModelModel(

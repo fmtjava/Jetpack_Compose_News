@@ -11,7 +11,7 @@ interface Api {
         const val NEWS_URL = "4/news/latest"
         const val MOVIE_URL =
             "http://baobab.kaiyanapp.com/api/v4/rankList/videos"
-        const val PIC_URL = "https://gank.io/api/v2/data/category/Girl/type/Girl/page/1/count/21"
+        const val PIC_URL = "https://www.vcg.com/api/creative/sets/520055525?page=1"
         const val WEATHER_URL =
             "http://api.k780.com/?app=weather.future&weaId=169&&appkey=10003&sign=b59bc3ef6191eb9f747dd4e83c99f2a4&format=json"
     }

@@ -49,7 +49,7 @@ fun PicturePage(viewModel: PictureViewModel = viewModel()) {
                 items(picList) { item ->
                     Image(
                         painter = rememberImagePainter(
-                            item.url,
+                            item.url800,
                             builder = {
                                 crossfade(true)
                                 transformations(CircleCropTransformation())
@@ -61,7 +61,7 @@ fun PicturePage(viewModel: PictureViewModel = viewModel()) {
                             .width(120.dp)
                             .height(120.dp)
                             .clickable {
-                                PhotoActivity.go(context as Activity, item.url)
+                                PhotoActivity.go(context as Activity, item.url800)
                             }
                     )
                 }
